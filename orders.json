@@ -1,0 +1,110 @@
+[
+    {
+        "name": "subhajit khanda",
+        "phone": "301245665222",
+        "address": "egra - aluya ward no- 04",
+        "paymentMethod": "cod",
+        "cartItems": [
+            {
+                "id": 11,
+                "name": "Vanilla Cake (Cream)",
+                "price": 5,
+                "image": "https://salasarbakers.com/wp-content/uploads/2022/09/cream-cake-vanilla.jpg",
+                "description": "Classic vanilla cream cake.",
+                "category": "CAKES",
+                "quantity": 1
+            }
+        ],
+        "total": 5
+    },
+    {
+        "name": "subhajit khanda",
+        "phone": "301245665222",
+        "address": "egra - aluya ward no- 04",
+        "paymentMethod": "cod",
+        "cartItems": [
+            {
+                "id": 11,
+                "name": "Vanilla Cake (Cream)",
+                "price": 5,
+                "image": "https://salasarbakers.com/wp-content/uploads/2022/09/cream-cake-vanilla.jpg",
+                "description": "Classic vanilla cream cake.",
+                "category": "CAKES",
+                "quantity": 6
+            }
+        ],
+        "total": 30
+    },
+    {
+        "name": "Amit Das",
+        "phone": "9696325140",
+        "address": "egra - aluya ward no- 04",
+        "paymentMethod": "cod",
+        "cartItems": [
+            {
+                "id": 59,
+                "name": "Ajwain Cookies (Large)",
+                "price": 225,
+                "image": "https://salasarbakers.com/wp-content/uploads/2022/09/ajwain-cookies.jpg",
+                "description": "Large pack of crispy ajwain cookies.",
+                "category": "COOKIES",
+                "quantity": 4
+            }
+        ],
+        "total": 900
+    },
+    {
+        "name": "Amit Das",
+        "phone": "9696325140",
+        "address": "egra - aluya ward no- 04",
+        "paymentMethod": "cod",
+        "cartItems": [
+            {
+                "id": 34,
+                "name": "200 gm Slice Brown Bread",
+                "price": 18,
+                "image": "https://salasarbakers.com/wp-content/uploads/2022/10/pw003.png",
+                "description": "Healthy 200gm sliced brown bread.",
+                "category": "BREAD",
+                "quantity": 4
+            }
+        ],
+        "total": 72
+    },
+    {
+        "name": "Amit Das",
+        "phone": "301245665222",
+        "address": "egra - aluya ward no- 04",
+        "paymentMethod": "cod",
+        "cartItems": [
+            {
+                "id": 10,
+                "name": "Chocolate Cake (Cream)",
+                "price": 5,
+                "image": "https://salasarbakers.com/wp-content/uploads/2022/09/cream-cake-chocolate.jpg",
+                "description": "Rich chocolate cream cake.",
+                "category": "CAKES",
+                "quantity": 5
+            }
+        ],
+        "total": 25
+    },
+    {
+        "name": "subhajit khanda",
+        "phone": "301245665222",
+        "address": "egra - aluya ward no- 04",
+        "paymentMethod": "cod",
+        "cartItems": [
+            {
+                "id": 19,
+                "name": "Mixed Fruit Cake (Royal Bake)",
+                "price": 20,
+                "image": "https://salasarbakers.com/wp-content/uploads/2022/09/royal-bake-mixed-fruit.jpg",
+                "description": "Premium mixed fruit cake from our Royal Bake collection.",
+                "category": "CAKES",
+                "quantity": 1
+            }
+        ],
+        "total": 20
+    }
+]

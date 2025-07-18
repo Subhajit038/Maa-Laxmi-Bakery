@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maa Laxmi Bakery Online Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='grocery.css') }}">
+<script src="{{ url_for('static', filename='grocery.js') }}"></script>
+
+</head>
+<body class="bg-amber-50 text-gray-800">
+    <!-- Header Section -->
+    <header class="bg-amber-700 text-white shadow-xl py-5 px-6 w-full z-50 rounded-b-3xl transition-all duration-300 ease-in-out">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="flex items-center space-x-3 text-3xl font-extrabold tracking-tight">
+                <img src="https://placehold.co/50x50/FFFFFF/8B4513?text=ML" alt="Maa Laxmi Bakery Logo" class="h-12 w-12 rounded-full shadow-md">
+                <span>Maa Laxmi Bakery</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 text-lg font-semibold">
+                <a href="#home" class="hover:text-amber-200 transition duration-300 transform hover:scale-105">Home</a>
+                <a href="#products" class="hover:text-amber-200 transition duration-300 transform hover:scale-105">Products</a>
+                <a href="#about" class="hover:text-amber-200 transition duration-300 transform hover:scale-105">About Us</a>
+                <a href="#contact" class="hover:text-amber-200 transition duration-300 transform hover:scale-105">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="cart-button" class="relative p-3 rounded-full bg-amber-600 hover:bg-amber-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-amber-300 shadow-md">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-amber-700">0</span>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden p-3 rounded-full bg-amber-600 hover:bg-amber-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-amber-300 shadow-md">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-amber-800 bg-opacity-95 z-40 hidden md:hidden flex-col items-center justify-center space-y-10 text-3xl font-bold transform -translate-x-full transition-transform duration-500 ease-in-out">
+            <button id="close-mobile-menu" class="absolute top-8 right-8 text-white text-4xl focus:outline-none focus:ring-2 focus:ring-amber-400 rounded-full p-2">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="#home" class="text-white hover:text-amber-200 transition duration-300" onclick="closeMobileMenu()">Home</a>
+            <a href="#products" class="text-white hover:text-amber-200 transition duration-300" onclick="closeMobileMenu()">Products</a>
+            <a href="#about" class="text-white hover:text-amber-200 transition duration-300" onclick="closeMobileMenu()">About Us</a>
+            <a href="#contact" class="text-white hover:text-amber-200 transition duration-300" onclick="closeMobileMenu()">Contact</a>
+        </div>
+    </header>
+
+    <section id="home" class="relative h-screen flex items-center justify-center text-center bg-cover bg-center rounded-b-3xl shadow-2xl" style="background-image: url('https://placehold.co/1920x1080/F5DEB3/8B4513?text=Welcome!+Maa+Laxmi+Bakery+Online+Platform');">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-transparent rounded-b-3xl"></div>
+      <div class="relative z-10 text-white p-8 max-w-4xl mx-auto">
+        <h2 class="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight mb-6 drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] animate-fade-in-down tracking-tight">
+          <span class="block bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-amber-500 to-orange-600">
+            Taste the Tradition,
+          </span>
+          <span class="block bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-red-400">
+            Savor the Sweetness
+          </span>
+        </h2>
+        <p class="text-lg md:text-2xl lg:text-3xl mb-10 text-white/90 animate-fade-in-up">
+          Handcrafted with love, delivered fresh to your doorstep.
+        </p>
+        <a href="#products"
+          class="inline-block bg-gradient-to-r from-amber-400 to-orange-500 hover:from-orange-500 hover:to-amber-400 text-white font-semibold py-4 px-10 rounded-full shadow-lg transform hover:scale-110 transition-all duration-300 ease-in-out border border-white/30 backdrop-blur-sm">
+          🍰 Explore Our Delicious Range
+        </a>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="container mx-auto py-20 px-6">
+        <h2 class="text-5xl font-extrabold text-center mb-16 text-amber-800 drop-shadow-md">Our Delicious Offerings</h2>
+        <div id="all-product-categories-container">
+            <!-- Product categories and their products will be dynamically loaded here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="bg-amber-100 py-20 px-6 rounded-t-3xl shadow-2xl">
+        <div class="container mx-auto text-center max-w-5xl">
+            <h2 class="text-5xl font-extrabold mb-10 text-amber-800 drop-shadow-md">Our Story</h2>
+            <p class="text-xl leading-relaxed mb-8 text-gray-700">
+                At **Maa Laxmi Bakery**, we believe in the magic of traditional baking combined with a touch of modern flair. Established with a passion for creating delightful treats, our bakery has been serving the community with freshly baked goods made from the finest ingredients.
+            </p>
+            <p class="text-xl leading-relaxed text-gray-700">
+                Every loaf of bread, every delicate pastry, and every decadent cake is crafted with care and dedication, ensuring a taste that brings joy and comfort. We are committed to quality, freshness, and the satisfaction of our customers. Join us on a journey of sweet indulgence!
+            </p>
+            <div class="flex justify-center mt-12">
+                <a href="https://i.ibb.co/Q3LZtrTZ/IMG-20250713-112114.jpg" target="_blank" rel="noopener noreferrer" class="block w-full max-w-2xl">
+                    <img src="https://i.ibb.co/Q3LZtrTZ/IMG-20250713-112114.jpg" alt="Our Bakery Story" class="rounded-2xl shadow-xl w-full object-cover h-auto">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6">
+        <div class="container mx-auto text-center max-w-5xl">
+            <h2 class="text-5xl font-extrabold mb-12 text-amber-800 drop-shadow-md">GET IN TOUCH</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+                <div class="bg-white p-10 rounded-3xl shadow-xl border border-amber-200">
+                    <h3 class="text-3xl font-bold mb-6 text-amber-700"><i class="fas fa-map-marker-alt mr-4 text-amber-500"></i>Visit Us</h3>
+                    <address class="not-italic text-lg text-gray-700 leading-relaxed">
+                        Egra,patlika Bazer,<br>
+                        <i class="fas fa-landmark"></i> Egra,Shashan Kali Mandir Road. <br>
+                        West Bengal, India - 721429
+                    </address>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-xl border border-amber-200">
+                    <h3 class="text-3xl font-bold mb-6 text-amber-700"><i class="fas fa-phone-alt mr-4 text-amber-500"></i>Call or Email</h3>
+                    <p class="text-lg text-gray-700 mb-3">Phone: <a href="tel:+919876543210" class="text-blue-600 hover:underline font-semibold">+91 98765 43210</a></p>
+                    <p class="text-lg text-gray-700">Email: <a href="mailto:info@maalaxmibakery.com" class="text-blue-600 hover:underline font-semibold">info@maalaxmibakery.com</a></p>
+                </div>
+            </div>
+            <div class="mt-16 bg-white p-10 rounded-3xl shadow-xl border border-amber-200">
+                <h3 class="text-3xl font-bold mb-8 text-amber-700"> For Any Queries</h3>
+                <form class="space-y-8">
+                    <div>
+                        <label for="name" class="block text-xl font-medium text-gray-700 mb-3 text-left">Your Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:ring-amber-500 focus:border-amber-500 text-lg" placeholder="">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-xl font-medium text-gray-700 mb-3 text-left">Your Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:ring-amber-500 focus:border-amber-500 text-lg" placeholder="">
+                    </div>
+                    <div>
+                        <label for="Subject" class="block text-xl font-medium text-gray-700 mb-3 text-left">Subject</label>
+                        <input type="Subject" id="Subject" name="Subject" class="mt-1 block w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:ring-amber-500 focus:border-amber-500 text-lg" placeholder="">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-xl font-medium text-gray-700 mb-3 text-left">Message</label>
+                        <textarea id="message" name="message" rows="6" class="mt-1 block w-full p-4 border border-gray-300 rounded-xl shadow-sm focus:ring-amber-500 focus:border-amber-500 text-lg" placeholder="How can we help you?"></textarea>
+                    </div>
+                    <button type="submit" class="w-full md:w-auto inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 px-10 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out border-2 border-amber-400">
+                        Send Message
+                    </button>
+                </form>
+            </div>  
+             <div class="mt-16 bg-white p-10 rounded-3xl shadow-xl border border-amber-200 mx-auto max-w-4xl">
+                <h3 class="text-3xl font-bold mb-8 text-amber-700"><i class="fas fa-map-marked-alt mr-4 text-amber-500"></i>Find Us On Map</h3>
+                <div class="relative w-full overflow-hidden rounded-2xl" style="padding-top: 56.25%;"> <!-- 16:9 Aspect Ratio -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14781.332028688846!2d87.52554702936737!3d21.89069796068886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0328e19e2b2b2b%3A0x8a2b2b2b2b2b2b2b!2sEgra%2C%20West%20Bengal%20721429!5e0!3m2!1sen!2sin!4v1720853510526!5m2!1sen!2sin"
+                        width="600"
+                        height="450"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="absolute top-0 left-0 w-full h-full rounded-2xl"
+                    ></iframe>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">
+                    *Live location of Maa Laxmi Bakery.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-amber-700 text-white py-10 px-6 rounded-t-3xl shadow-inner">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0 text-lg">&copy; 2025 Maa Laxmi Bakery. All rights reserved.</p>
+            <div class="flex space-x-8">
+                <a href="#" class="text-white hover:text-amber-200 transition duration-300 transform hover:scale-125"><i class="fab fa-facebook-f text-2xl"></i></a>
+                <a href="#" class="text-white hover:text-amber-200 transition duration-300 transform hover:scale-125"><i class="fab fa-twitter text-2xl"></i></a>
+                <a href="#" class="text-white hover:text-amber-200 transition duration-300 transform hover:scale-125"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="#" class="text-white hover:text-amber-200 transition duration-300 transform hover:scale-125"><i class="fab fa-pinterest-p text-2xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal-backdrop">
+        <div class="modal-content w-full max-w-2xl">
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <h2 class="text-3xl font-bold text-amber-800">Complete Your Order</h2>
+                <button id="close-payment-modal-btn" class="text-gray-500 hover:text-gray-800 text-4xl">&times;</button>
+            </div>
+
+            <div id="payment-message" class="hidden p-4 mb-4 text-sm rounded-lg" role="alert"></div>
+
+            <form id="payment-form" class="space-y-6">
+                <!-- Order Summary -->
+                <div class="bg-amber-50 p-4 rounded-lg border border-amber-200">
+                    <h3 class="text-xl font-semibold text-amber-700 mb-2">Order Summary</h3>
+                    <div class="flex justify-between items-center text-lg">
+                        <span class="text-gray-600">Total Amount:</span>
+                        <span id="payment-total" class="font-bold text-amber-800">₹0.00</span>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div>
+                    <h3 class="text-xl font-semibold text-amber-700 mb-4">Shipping Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="payer-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="payer-name" placeholder="John Doe" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                        </div>
+                        <div>
+                            <label for="payer-phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="tel" id="payer-phone" placeholder="+91 9876543210" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label for="payer-address" class="block text-sm font-medium text-gray-700">Full Address</label>
+                        <input type="text" id="payer-address" placeholder="123 Bakery Lane, Egra, West Bengal" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div>
+                    <h3 class="text-xl font-semibold text-amber-700 mb-4">Payment Method</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="payment-method-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="card" class="sr-only" checked>
+                            <div class="payment-option-content">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Card</span>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="upi" class="sr-only">
+                            <div class="payment-option-content">
+                                <i class="fa-brands fa-google-pay"></i> <!-- Using a generic icon -->
+                                <span>UPI</span>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="cod" class="sr-only">
+                            <div class="payment-option-content">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Cash on Delivery</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Payment Details Container -->
+                <div id="payment-details-container" class="payment-details-animation">
+                    <!-- Dynamic content will be injected here by JS -->
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col-reverse sm:flex-row gap-4 pt-4 border-t mt-6">
+                    <button type="button" id="cancel-payment-btn" class="w-full sm:w-auto justify-center inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                        Cancel
+                    </button>
+                    <button type="submit" id="submit-payment-btn" class="w-full sm:w-full bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition-colors">
+                        Pay ₹0.00
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Cart Modal (Hidden by default) -->
+    <div id="cart-modal" class="modal-backdrop">
+        <div class="modal-content w-full md:w-2/3 lg:w-1/2">
+            <div class="flex justify-between items-center mb-8 border-b pb-4">
+                <h2 class="text-4xl font-bold text-amber-800">Your Cart</h2>
+                <button id="close-cart-modal" class="text-gray-500 hover:text-gray-800 text-4xl focus:outline-none focus:ring-2 focus:ring-amber-400 rounded-full p-2">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="cart-items-container" class="max-h-96 overflow-y-auto mb-8">
+                <p id="empty-cart-message" class="text-gray-600 text-center text-xl py-8">Your cart is empty.</p>
+            </div>
+            <div id="cart-summary" class="border-t pt-6 flex flex-col sm:flex-row justify-between items-center">
+                <p class="text-3xl font-bold text-amber-800 mb-4 sm:mb-0">Total: <span id="cart-total">₹0.00</span></p>
+                <button id="checkout-button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                    Place Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal (Hidden by default) -->
+    <div id="order-confirmation-modal" class="modal-backdrop">
+        <div class="modal-content text-center">
+            <h2 class="text-4xl font-bold text-green-600 mb-6"><i class="fas fa-check-circle text-green-500 mr-3"></i>Order Placed Successfully!</h2>
+            <p class="text-xl text-gray-700 mb-8">Thank you for your purchase from Maa Laxmi Bakery. Your order will be processed shortly.</p>
+            <button id="close-order-confirmation-modal" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+</body>
+</html>

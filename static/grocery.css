@@ -1,0 +1,143 @@
+/* Custom styles to ensure Inter font is applied globally */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #d4a762; /* A shade of amber */
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #b88a4c;
+}
+
+/* Smooth scroll for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Basic modal backdrop */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+    display: none; /* Changed from flex to none */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease; /* Slower transition */
+}
+.modal-backdrop.open {
+    display: flex; /* Display when open */
+    opacity: 1;
+    visibility: visible;
+}
+.modal-content {
+    background-color: white;
+    padding: 2rem; /* Adjusted padding */
+    border-radius: 1.5rem; /* More rounded */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+    max-width: 90%;
+    max-height: 90vh; /* Use vh for height */
+    overflow-y: auto;
+    transform: translateY(-30px); /* More pronounced slide-in */
+    transition: transform 0.4s ease;
+}
+.modal-backdrop.open .modal-content {
+    transform: translateY(0);
+}
+
+/* Custom animation for hero section button */
+@keyframes bounce-in {
+    0% { transform: translateY(20px); opacity: 0; }
+    60% { transform: translateY(-5px); opacity: 1; }
+    100% { transform: translateY(0); }
+}
+.animate-bounce-in {
+    animation: bounce-in 0.8s ease-out forwards;
+    animation-delay: 0.5s; /* Delay to appear after text */
+    opacity: 0; /* Start hidden */
+}
+
+/* Sticky header effect */
+.header-sticky {
+    position: sticky;
+    top: 0;
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0); }
+}
+
+/* Payment Modal Specific Styles */
+.payment-option {
+    cursor: pointer;
+}
+
+.payment-option-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 2px solid #e5e7eb; /* gray-200 */
+    border-radius: 0.75rem; /* rounded-xl */
+    transition: all 0.2s ease-in-out;
+    gap: 0.5rem;
+}
+
+.payment-option-content i {
+    font-size: 1.875rem; /* text-3xl */
+    color: #9ca3af; /* gray-400 */
+    transition: color 0.2s ease-in-out;
+}
+
+.payment-option-content span {
+    font-weight: 600; /* font-semibold */
+    color: #4b5563; /* gray-600 */
+    transition: color 0.2s ease-in-out;
+}
+
+/* Style for selected payment option */
+.payment-option input:checked + .payment-option-content {
+    border-color: #d97706; /* amber-600 */
+    background-color: #fffbeb; /* amber-50 */
+    box-shadow: 0 0 0 2px #d97706;
+}
+
+.payment-option input:checked + .payment-option-content i,
+.payment-option input:checked + .payment-option-content span {
+    color: #b45309; /* amber-700 */
+}
+
+/* Animation for payment details section */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.payment-details-animation {
+    animation: fadeInSlideUp 0.5s ease-out forwards;
+}
