@@ -106,5 +106,23 @@
             }
         ],
         "total": 20
+    },
+    {
+        "name": "subhajit khanda",
+        "phone": "9696325140",
+        "address": "egra - aluya ward no- 04",
+        "paymentMethod": "cod",
+        "cartItems": [
+            {
+                "id": 45,
+                "name": "Jeera Mast Cookies (Small)",
+                "price": 65,
+                "image": "https://salasarbakers.com/wp-content/uploads/2022/10/pw014.png",
+                "description": "Savory cumin-flavored cookies.",
+                "category": "COOKIES",
+                "quantity": 1
+            }
+        ],
+        "total": 65
     }
 ]

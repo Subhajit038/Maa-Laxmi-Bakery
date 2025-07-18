@@ -298,85 +298,69 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    paymentForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        hidePaymentMessage();
-        
-        // Basic validation
-        const name = document.getElementById('payer-name').value.trim();
-        const phone = document.getElementById('payer-phone').value.trim();
-        const address = document.getElementById('payer-address').value.trim();
 
-        if (!name || !phone || !address) {
-            showPaymentMessage('Please fill in all shipping information fields.');
-            return;
-        }
+    // --- New Payment Form Submission Logic (as requested) ---
+    paymentForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-        const selectedMethod = paymentForm.querySelector('input[name="payment-method"]:checked').value;
-        let isValid = true;
-            if (isValid) {
-        // ✅ REPLACE THIS BLOCK:
-        // closeModal(paymentModal);
-        // openModal(orderConfirmationModal);
-        // cart = [];
-        // updateCartUI();
+      const name = document.getElementById("payer-name").value;
+      const phone = document.getElementById("payer-phone").value;
+      const address = document.getElementById("payer-address").value;
+      const paymentMethod = document.querySelector("input[name='payment-method']:checked").value;
 
-        // ✅ WITH THIS FETCH CALL TO BACKEND:
-        const orderPayload = {
-            name,
-            phone,
-            address,
-            paymentMethod: selectedMethod,
-            cartItems: cart,
-            total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-        };
+      // Get cart items and total from JS (cart array)
+      function getCartItemsFromDOM() {
+        // Return a simplified array of cart items
+        return cart.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity
+        }));
+      }
+      const cartItems = getCartItemsFromDOM();
+      const totalAmount = parseFloat(document.getElementById("payment-total").textContent.replace("₹", "")) || 0;
 
-        fetch('/place_order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(orderPayload)
-        })
-        .then(response => response.json())
-        .then(data => {
-            closeModal(paymentModal);
-            openModal(orderConfirmationModal);
-            cart = [];
-            updateCartUI();
-            console.log(data.message);
-        })
-        .catch(err => {
-            console.error("Order Error:", err);
-            showPaymentMessage("Failed to place order. Please try again.");
-        });
+      const orderData = {
+        name,
+        phone,
+        address,
+        payment_method: paymentMethod,
+        items: cartItems,
+        total: totalAmount
+      };
+
+      fetch("/place_order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+      })
+      .then(res => res.json())
+      .then(response => {
+        alert(response.message);
+        closeModal(paymentModal); // Close modal if success
+        showOrderConfirmation(); // Show confirmation modal
+        clearCart(); // Reset cart
+      })
+      .catch(err => {
+        console.error("Error placing order:", err);
+        alert("Something went wrong. Please try again.");
+      });
+    });
+
+    function showOrderConfirmation() {
+      document.getElementById("payment-modal").style.display = "none";
+      document.getElementById("order-confirmation-modal").style.display = "block";
     }
 
-        if (selectedMethod === 'card') {
-            const cardNumber = document.getElementById('card-number').value;
-            const mm = document.getElementById('card-expiry-mm').value;
-            const yy = document.getElementById('card-expiry-yy').value;
-            const cvv = document.getElementById('card-cvv').value;
-            if (!cardNumber || !mm || !yy || !cvv) {
-                isValid = false;
-                showPaymentMessage('Please fill in all card details.');
-            }
-        } else if (selectedMethod === 'upi') {
-            const upiId = document.getElementById('upi-id').value;
-            if (!upiId) {
-                isValid = false;
-                showPaymentMessage('Please enter your UPI ID.');
-            }
-        }
-
-        if (isValid) {
-            // Simulate successful payment
-            closeModal(paymentModal);
-            openModal(orderConfirmationModal);
-            cart = [];
-            updateCartUI();
-        }
-    });
+    function clearCart() {
+      // Empty cart logic
+      cart = [];
+      document.getElementById("cart-items-container").innerHTML = "";
+      document.getElementById("cart-total").textContent = "₹0.00";
+      document.getElementById("payment-total").textContent = "₹0.00";
+      updateCartUI();
+    }
 
     // --- General Event Listeners ---
     cartButton.addEventListener('click', () => openModal(cartModal));
@@ -421,4 +405,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initial Load ---
     renderProducts();
     updateCartUI();
+});
+
+// Contact Form Submission Handler
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('Subject').value,
+        message: document.getElementById('message').value
+      };
+
+      fetch('/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(response => {
+        alert(response.message);
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("Something went wrong. Try again!");
+      });
+    });
+  }
 });
