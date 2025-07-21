@@ -37,7 +37,6 @@ const products = [
     { id: 40, name: "Assorted Cream Roll Pack", price: 60.00, image: "https://salasarbakers.com/wp-content/uploads/2022/09/cream-roll.jpg", description: "A pack of assorted cream rolls.", category: "CREAM ROLL" },
     // COOKIES
     { id: 41, name: "All Time Cookies (Pack 1)", price: 15.00, image: "https://salasarbakers.com/wp-content/uploads/2022/09/maa-annapurna-all-time.jpg", description: "Our popular 'All Time' cookies, perfect for any moment.", category: "COOKIES" },
-    { id: 42, name: "All Time Cookies (Pack 2)", price: 15.00, image: "https://salasarbakers.com/wp-content/uploads/2022/09/maa-annapurna-all-time-another.jpeg", description: "Another pack of our delicious 'All Time' cookies.", category: "COOKIES" },
     { id: 43, name: "Tea Bite Cookies", price: 45.00, image: "https://salasarbakers.com/wp-content/uploads/2022/09/maa-annapurna-tea-bite.jpeg", description: "Perfect companions for your tea time.", category: "COOKIES" },
     { id: 44, name: "Osmania Cookies (Small)", price: 60.00, image: "https://salasarbakers.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-12-09-at-8.16.36-PM.jpeg", description: "Classic Osmania cookies, melt-in-your-mouth goodness.", category: "COOKIES" },
     { id: 45, name: "Jeera Mast Cookies (Small)", price: 65.00, image: "https://salasarbakers.com/wp-content/uploads/2022/10/pw014.png", description: "Savory cumin-flavored cookies.", category: "COOKIES" },
