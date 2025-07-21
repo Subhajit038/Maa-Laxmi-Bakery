@@ -36,6 +36,27 @@ def contact():
 # ✅ Place an order
 @app.route('/place_order', methods=['POST'])
 def place_order():
+    try:
+        data = request.get_json()
+        print("Received order data:", data)  # Debug print
+        if data:
+            order = {
+                "name": data.get("name"),
+                "phone": data.get("phone"),
+                "address": data.get("address"),
+                "payment_method": data.get("payment_method"),
+                "items": data.get("items"),
+                "total": data.get("total"),
+                "timestamp": datetime.utcnow()
+            }
+            orders_collection.insert_one(order)
+            return jsonify({"message": "Order placed successfully!"}), 200
+        return jsonify({"error": "Invalid order data"}), 400
+    except Exception as e:
+        print("Order error:", e)  # Print error to console
+        return jsonify({"error": "Server error", "details": str(e)}), 500
+    
+# ✅ Place an order with shipping info
     data = request.get_json()
     if data:
         order = {

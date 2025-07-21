@@ -301,81 +301,50 @@ document.addEventListener('DOMContentLoaded', () => {
     paymentForm.addEventListener('submit', (e) => {
         e.preventDefault();
         hidePaymentMessage();
-        
-        // Basic validation
-        const name = document.getElementById('payer-name').value.trim();
-        const phone = document.getElementById('payer-phone').value.trim();
-        const address = document.getElementById('payer-address').value.trim();
+
+        // Use correct field IDs for shipping info
+        const name = document.getElementById('payer-name')?.value?.trim();
+        const phone = document.getElementById('payer-phone')?.value?.trim();
+        const address = document.getElementById('payer-address')?.value?.trim();
+        const selectedMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
 
         if (!name || !phone || !address) {
             showPaymentMessage('Please fill in all shipping information fields.');
             return;
         }
 
-        const selectedMethod = paymentForm.querySelector('input[name="payment-method"]:checked').value;
-        let isValid = true;
-            if (isValid) {
-        // ✅ REPLACE THIS BLOCK:
-        // closeModal(paymentModal);
-        // openModal(orderConfirmationModal);
-        // cart = [];
-        // updateCartUI();
+        // Helper for total calculation
+        function calculateTotal(cartArr) {
+            return cartArr.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        }
 
-        // ✅ WITH THIS FETCH CALL TO BACKEND:
         const orderPayload = {
-            name,
-            phone,
-            address,
-            paymentMethod: selectedMethod,
-            cartItems: cart,
-            total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+            name: name,
+            phone: phone,
+            address: address,
+            payment_method: selectedMethod,
+            items: cart,
+            total: calculateTotal(cart)
         };
 
         fetch('/place_order', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderPayload)
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(res => res.json())
+        .then(response => {
+            alert(response.message);
             closeModal(paymentModal);
-            openModal(orderConfirmationModal);
+            orderConfirmationModal.style.display = 'block';
+            paymentModal.style.display = 'none';
             cart = [];
             updateCartUI();
-            console.log(data.message);
         })
         .catch(err => {
-            console.error("Order Error:", err);
-            showPaymentMessage("Failed to place order. Please try again.");
+            console.error('Error placing order:', err);
+            showPaymentMessage('Something went wrong. Please try again.');
         });
-    }
-
-        if (selectedMethod === 'card') {
-            const cardNumber = document.getElementById('card-number').value;
-            const mm = document.getElementById('card-expiry-mm').value;
-            const yy = document.getElementById('card-expiry-yy').value;
-            const cvv = document.getElementById('card-cvv').value;
-            if (!cardNumber || !mm || !yy || !cvv) {
-                isValid = false;
-                showPaymentMessage('Please fill in all card details.');
-            }
-        } else if (selectedMethod === 'upi') {
-            const upiId = document.getElementById('upi-id').value;
-            if (!upiId) {
-                isValid = false;
-                showPaymentMessage('Please enter your UPI ID.');
-            }
-        }
-
-        if (isValid) {
-            // Simulate successful payment
-            closeModal(paymentModal);
-            openModal(orderConfirmationModal);
-            cart = [];
-            updateCartUI();
-        }
     });
 
     // --- General Event Listeners ---
