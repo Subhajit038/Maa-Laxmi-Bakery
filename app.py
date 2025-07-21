@@ -4,16 +4,21 @@ from datetime import datetime
 import os, json
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/bakerydb"  # Change if using Atlas
+
+# ✅ MongoDB Atlas URI (replace password if you change it)
+app.config["MONGO_URI"] = "mongodb+srv://subhajitkhanra038:NYaGlguBTGzUVAWa@maalaxmidb.vesuxvv.mongodb.net/bakerydb?retryWrites=true&w=majority"
 mongo = PyMongo(app)
 
+# ✅ Collections
 contact_collection = mongo.db.contacts
-orders_collection = mongo.db.orders  # Orders collection
+orders_collection = mongo.db.orders
 
+# ✅ Home route
 @app.route('/')
 def index():
-    return render_template('grocery.html')
+    return render_template('grocery.html')  # Make sure grocery.html exists in templates folder
 
+# ✅ Contact form submission
 @app.route('/contact', methods=['POST'])
 def contact():
     data = request.get_json()
@@ -28,7 +33,7 @@ def contact():
         return jsonify({"message": "Thank you for contacting us!"}), 200
     return jsonify({"error": "No data received"}), 400
 
-# ✅ Save order to MongoDB
+# ✅ Place an order
 @app.route('/place_order', methods=['POST'])
 def place_order():
     data = request.get_json()
@@ -46,5 +51,6 @@ def place_order():
         return jsonify({"message": "Order placed successfully!"}), 200
     return jsonify({"error": "Invalid order data"}), 400
 
+# ✅ Run the app
 if __name__ == '__main__':
     app.run(debug=True)
